@@ -1,9 +1,12 @@
 import AppLayout from "./AppLayout";
+import {UserProvider} from "./hooks/UserProvider";
 
 
 export default function App() {
   return (
-      <AppLayout />
+      <UserProvider>
+        <AppLayout />
+      </UserProvider>
   );
 }
 

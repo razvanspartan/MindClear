@@ -1,28 +1,65 @@
 import {Text, View, StyleSheet, TextInput, Button, TouchableOpacity} from "react-native";
+import React, {useState} from 'react'
 import { COLORS } from '../constants/colors';
 import Heart from "../images/heart";
 import * as Font from 'expo-font';
 import Icon from "../images/icon";
 import inputStuff from "../components/input";
 import InputStuff from "../components/input";
+import axios from 'axios';
+import {useUserContext} from "../hooks/UserProvider";
 const SignUp = ({navigation}) => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [company, setCompany] = useState('');
+    const [error, setError] =useState('')
+    const [showError, setShowError] = useState(false)
+    const { login } = useUserContext();
+    const handleSignUp = async () =>{
+        console.log(email)
+        try{
 
+        const response = await axios.post('http://139.59.156.48:5000/api/signup', {
+            'firstName':firstName,
+            'lastName': lastName,
+            'email':email,
+            'password':password,
+            'company':company,
+        });
+        console.log('Response:', response.data);
+        login(response.data.user)
+
+        }catch(erroraxios){
+            setError(erroraxios);
+            setShowError(true)
+            console.error('Error:', error)
+        }
+    }
     return(
         <View style={styles.container}>
             <Icon style={styles.icon}></Icon>
             <Text style={styles.middle_titleSU}>Make an account</Text>
             <View style={styles.inputContainer}>
-                <InputStuff name={"First name"} placeholder={"First name.."} type={'default'}></InputStuff>
-                <InputStuff name={"Last name"} placeholder={"Last name.."} type={'default'}></InputStuff>
-                <InputStuff name={"Email"} placeholder={"Email.."} type={'email-address'}></InputStuff>
-                <InputStuff name={"Password"} placeholder={"Password.."} type={'password'}></InputStuff>
-                <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>Start your journey</Text></TouchableOpacity>
+                <InputStuff name={"First name"} placeholder={"First name.."} type={'default'} value={firstName} onChangeText={setFirstName}></InputStuff>
+                <InputStuff name={"Last name"} placeholder={"Last name.."} type={'default'} value={lastName} onChangeText={setLastName}></InputStuff>
+                <InputStuff name={"Email"} placeholder={"Email.."} type={'email-address'} value={email} onChangeText={setEmail}></InputStuff>
+                <InputStuff name={"Password"} placeholder={"Password.."} type={'password'} value={password} onChangeText={setPassword}></InputStuff>
+                <InputStuff name={"Company name"} placeholder={"Company name.."} type={'default'} value={company} onChangeText={setCompany}></InputStuff>
+                { showError && (<Text style={styles.errortext}>{error}</Text>)}
+                <TouchableOpacity style={styles.button} onPress={handleSignUp}><Text style={styles.buttonText}>Start your journey</Text></TouchableOpacity>
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    errortext:{
+        fontFamily: "Lato-Regular",
+        color: COLORS.primary,
+        fontSize: 16
+    },
     middle_titleSU:{
         fontSize: 32,
         marginBottom: '5%',

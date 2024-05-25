@@ -5,7 +5,7 @@ import * as Font from 'expo-font';
 import Icon from "../images/icon";
 import {useState} from "react";
 
-const InputStuff = ({placeholder, name, type }) =>{
+const InputStuff = ({placeholder, name, type, onChangeText, value }) =>{
     const [isFocused, setIsFocused] = useState(false);
     return(
         <View style={styles.containerstuff}>
@@ -21,6 +21,8 @@ const InputStuff = ({placeholder, name, type }) =>{
         secureTextEntry={type === 'password'}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        value={value}
+        onChangeText={onChangeText}
     /></View>
     );
 }
