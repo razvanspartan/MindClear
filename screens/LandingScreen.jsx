@@ -2,21 +2,35 @@ import {Text, View, StyleSheet, TextInput, Button, TouchableOpacity} from "react
 import { COLORS } from '../constants/colors';
 import Heart from "../images/heart";
 import * as Font from 'expo-font';
-const LoginScreen = ({navigation}) => {
+import Icon from "../images/icon";
+const LandingScreen = ({navigation}) => {
 
     return(
         <View style={styles.container}>
-            <Heart style={styles.heart}/>
-            <Text style={styles.heart_logo_text}>MindClear</Text>
+            <Icon style={styles.icon}></Icon>
+            <Text style={styles.motto}>"Empowering Wellness, Together."</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.middle_title}>Get started</Text>
-                <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>Start your journey</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}><Text style={styles.buttonText}>I am an Employer</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>I am an Employee</Text></TouchableOpacity>
             </View>
+            <Text style={styles.textBot}>Contact   |  ToS  |   Privacy</Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    textBot:{
+        fontSize:12,
+        marginTop:'80%',
+        color: COLORS.primary,
+    },
+    motto:{
+        marginTop:'3%',
+        fontFamily:"Lato-Bold",
+        color:COLORS.primary,
+        fontWeight:"600",
+    },
     container: {
         flex: 1,
         flexDirection:'column',
@@ -27,13 +41,14 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     inputContainer:{
-      marginTop:'70%',
+        marginTop:'30%',
         display:'flex',
         flexDirection:'column',
         justifyContent:'space-between',
         width:"auto",
         height:"16%",
-        alignItems:'center'
+        alignItems:'center',
+        gap:24,
     },
     heart:{
         position: 'absolute',
@@ -50,12 +65,14 @@ const styles = StyleSheet.create({
         color: COLORS.primary,
     },
     middle_title:{
-        fontSize: 25,
+        fontSize: 40,
+        marginBottom: '5%',
         color: COLORS.primary,
         fontFamily: "Roboto-Bold",
-        fontWeight:"800",
+        fontWeight:"800"
     },
     input_field:{
+        backgroundColor: COLORS.primary,
         width: '70%',
         height: '5%',
         minHeight:'50px',
@@ -72,12 +89,18 @@ const styles = StyleSheet.create({
         width:260,
         borderWidth: 2,
         borderRadius: 10,
-        borderColor: "#800000",
+        borderColor: "#004080",
+
     },
     buttonText:{
-      fontFamily: "Lato-Regular",
+        fontFamily: "Lato-Regular",
+        color: COLORS.primary,
+        fontSize: 16
 
     },
+    icon:{
+        marginTop:100
+    }
 });
 
-export default LoginScreen;
+export default LandingScreen;

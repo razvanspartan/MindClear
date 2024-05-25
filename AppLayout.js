@@ -3,11 +3,18 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthentificationStack from './AuthentificationStack';
 import LoggedInStack from './LoggedInStack';
+import * as Font from 'expo-font';
 
-import { useFonts } from 'expo-font';
-// import { Nunito_300Light,Nunito_400Regular ,Nunito_600SemiBold,Nunito_700Bold} from '@expo-google-fonts/nunito';
+
 
 const AppLayout = () => {
+    const loadFonts = () => {
+        return Font.loadAsync({
+            'Roboto-Bold': require('./assets/RobotoFont/Roboto-Bold.ttf'),
+            'Lato-Regular': require('./assets/LatoFont/Lato-Regular.ttf'),
+            'Lato-Bold': require('./assets/LatoFont/Lato-Bold.ttf')
+        });
+    };
     const user = undefined;
     return (
         <NavigationContainer>
