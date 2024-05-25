@@ -2,14 +2,20 @@ import {Text, View, StyleSheet, TextInput, Button, TouchableOpacity} from "react
 import { COLORS } from '../constants/colors';
 import Heart from "../images/heart";
 import * as Font from 'expo-font';
-const LoginScreen = ({navigation}) => {
+import Icon from "../images/icon";
+import inputStuff from "../components/input";
+import InputStuff from "../components/input";
+const SignUp = ({navigation}) => {
 
     return(
         <View style={styles.container}>
-            <Heart style={styles.heart}/>
-            <Text style={styles.heart_logo_text}>MindClear</Text>
+            <Icon style={styles.icon}></Icon>
+            <Text style={styles.middle_titleSU}>Make an account</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.middle_title}>Get started</Text>
+                <InputStuff name={"First name"} placeholder={"First name.."} type={'default'}></InputStuff>
+                <InputStuff name={"Last name"} placeholder={"Last name.."} type={'default'}></InputStuff>
+                <InputStuff name={"Email"} placeholder={"Email.."} type={'email-address'}></InputStuff>
+                <InputStuff name={"Password"} placeholder={"Password.."} type={'password'}></InputStuff>
                 <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>Start your journey</Text></TouchableOpacity>
             </View>
         </View>
@@ -17,6 +23,14 @@ const LoginScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    middle_titleSU:{
+        fontSize: 32,
+        marginBottom: '5%',
+        color: COLORS.primary,
+        fontFamily: "Roboto-Bold",
+        fontWeight:"800",
+        marginTop: 70,
+    },
     container: {
         flex: 1,
         flexDirection:'column',
@@ -27,35 +41,26 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     inputContainer:{
-      marginTop:'70%',
+      marginTop:'10%',
         display:'flex',
         flexDirection:'column',
-        justifyContent:'space-between',
-        width:"auto",
-        height:"16%",
-        alignItems:'center'
+        width:"100%",
+        height:"50%",
+        alignItems:'center',
+        gap:20,
     },
-    heart:{
-        position: 'absolute',
-        top: '5%',
-        left: '7%',
-        width: '30%',
-        height: '20%',
-    },
-    heart_logo_text:{
-        position: 'absolute',
-        top: '9%',
-        left: '14%',
-        fontSize: 35,
-        color: COLORS.primary,
+    icon:{
+        marginTop:80,
+         marginRight:160,
     },
     middle_title:{
         fontSize: 25,
         color: COLORS.primary,
         fontFamily: "Roboto-Bold",
-        fontWeight:"800",
+        fontWeight:"800"
     },
     input_field:{
+        backgroundColor: COLORS.primary,
         width: '70%',
         height: '5%',
         minHeight:'50px',
@@ -63,7 +68,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     button:{
-        backgroundColor: "#004080",
+        backgroundColor: "#001F3D",
         borderStyle: "solid",
         display:"flex",
         justifyContent:'center',
@@ -72,12 +77,15 @@ const styles = StyleSheet.create({
         width:260,
         borderWidth: 2,
         borderRadius: 10,
-        borderColor: "#800000",
+        borderColor: "#001F3D",
+        marginTop: 40,
     },
     buttonText:{
-      fontFamily: "Lato-Regular",
+        fontFamily: "Lato-Regular",
+        color: COLORS.primary,
+        fontSize: 16
 
     },
 });
 
-export default LoginScreen;
+export default SignUp;

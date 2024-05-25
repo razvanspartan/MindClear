@@ -1,4 +1,4 @@
-import LoginScreen from "../screens/LoginScreen";
+import LoginScreen from "../screens/SignUpScreen";
 import Svg, { Path } from "react-native-svg";
 
 
