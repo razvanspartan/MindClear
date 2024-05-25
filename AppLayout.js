@@ -19,7 +19,7 @@ const AppLayout = () => {
     };
     return (
         <NavigationContainer>
-            {user!==undefined?
+            {user==undefined?
                 <LoggedInStack />:<AuthentificationStack />}
         </NavigationContainer>
     );
