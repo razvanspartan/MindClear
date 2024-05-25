@@ -8,30 +8,25 @@ import inputStuff from "../components/input";
 import InputStuff from "../components/input";
 import axios from 'axios';
 import {useUserContext} from "../hooks/UserProvider";
-const SignUp = ({navigation}) => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+const SignIn = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [company, setCompany] = useState('');
     const [error, setError] =useState('')
     const [showError, setShowError] = useState(false)
     const { login } = useUserContext();
-    const handleSignUp = async () =>{
-        console.log(email)
+    const handleSignIn = async () =>{
         try{
 
-        const response = await axios.post('http://139.59.156.48:5000/api/signup', {
-            'firstName':firstName,
-            'lastName': lastName,
-            'email':email,
-            'password':password,
-            'company':company,
-        });
-        console.log('Response:', response.data);
-        if(response.data.code=== 0){
-            navigation.navigate("SignIn");
-        }
+            const response = await axios.post('http://139.59.156.48:5000/api/login', {
+                'email':email,
+                'password':password,
+            });
+            console.log('Response:', response.data);
+            if(response.data.code === 0){
+                login(response.data)
+                navigation.navigate("EmployeePage")
+            }
+
 
         }catch(erroraxios){
             setError(erroraxios);
@@ -42,16 +37,12 @@ const SignUp = ({navigation}) => {
     return(
         <View style={styles.container}>
             <Icon style={styles.icon}></Icon>
-            <Text style={styles.middle_titleSU}>Make an account</Text>
+            <Text style={styles.middle_titleSU}>Get into your account</Text>
             <View style={styles.inputContainer}>
-                <InputStuff name={"First name"} placeholder={"First name.."} type={'default'} value={firstName} onChangeText={setFirstName}></InputStuff>
-                <InputStuff name={"Last name"} placeholder={"Last name.."} type={'default'} value={lastName} onChangeText={setLastName}></InputStuff>
                 <InputStuff name={"Email"} placeholder={"Email.."} type={'email-address'} value={email} onChangeText={setEmail}></InputStuff>
                 <InputStuff name={"Password"} placeholder={"Password.."} type={'password'} value={password} onChangeText={setPassword}></InputStuff>
-                <InputStuff name={"Company name"} placeholder={"Company name.."} type={'default'} value={company} onChangeText={setCompany}></InputStuff>
                 { showError && (<Text style={styles.errortext}>{error}</Text>)}
-                <TouchableOpacity style={styles.button} onPress={handleSignUp}><Text style={styles.buttonText}>Start your journey</Text></TouchableOpacity>
-                <TouchableOpacity onPress={()=>{navigation.navigate('SignIn')}}><Text style={styles.buttonText}>or sign in</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={handleSignIn}><Text style={styles.buttonText}>Start your journey</Text></TouchableOpacity>
             </View>
         </View>
     );
@@ -81,7 +72,7 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     inputContainer:{
-      marginTop:'10%',
+        marginTop:'10%',
         display:'flex',
         flexDirection:'column',
         width:"100%",
@@ -91,7 +82,7 @@ const styles = StyleSheet.create({
     },
     icon:{
         marginTop:80,
-         marginRight:160,
+        marginRight:160,
     },
     middle_title:{
         fontSize: 25,
@@ -128,4 +119,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SignUp;
+export default SignIn;

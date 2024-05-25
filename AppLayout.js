@@ -4,10 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import AuthentificationStack from './AuthentificationStack';
 import LoggedInStack from './LoggedInStack';
 import * as Font from 'expo-font';
+import {useUserContext} from "./hooks/UserProvider";
 
 
 
 const AppLayout = () => {
+    const {user} = useUserContext();
     const loadFonts = () => {
         return Font.loadAsync({
             'Roboto-Bold': require('./assets/RobotoFont/Roboto-Bold.ttf'),
@@ -15,10 +17,9 @@ const AppLayout = () => {
             'Lato-Bold': require('./assets/LatoFont/Lato-Bold.ttf')
         });
     };
-    const user = undefined;
     return (
         <NavigationContainer>
-            {user!=undefined?
+            {user!==undefined?
                 <LoggedInStack />:<AuthentificationStack />}
         </NavigationContainer>
     );

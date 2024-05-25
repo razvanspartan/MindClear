@@ -4,7 +4,6 @@ import Heart from "../images/heart";
 import * as Font from 'expo-font';
 import Icon from "../images/icon";
 const LandingScreen = ({navigation}) => {
-
     return(
         <View style={styles.container}>
             <Icon style={styles.icon}></Icon>
