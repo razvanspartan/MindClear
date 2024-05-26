@@ -8,41 +8,54 @@ import inputStuff from "../components/input";
 import InputStuff from "../components/input";
 import axios from 'axios';
 import {useUserContext} from "../hooks/UserProvider";
-const EmployeeSignIn = ({navigation}) => {
-    const [code, setCode] = useState('');
-    const [email, setEmail] = useState('')
-    const [error, setError] =useState('')
-    const [showError, setShowError] = useState(false)
-    const { login } = useUserContext();
-    const handleSignIn = async () =>{
+const EmployeeAdd = ({navigation}) => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [company, setCompany] = useState('');
+    const [DoB, setDoB]=useState('')
+    const [MoB, setMoB]=useState('')
+    const [YoB, setYoB]=useState('')
+
+    const handleSignUp = async () =>{
+        console.log(email)
         try{
 
-            const response = await axios.post('http://139.59.156.48:5000/api/employeeCode', {
-                'employeeEmail': email,
-                'employeeCode': code,
+            const response = await axios.post('http://139.59.156.48:5000/api/createUserCode', {
+                'company':company,
+                'firstName':firstName,
+                'lastName': lastName,
+                'email':email,
+                'dayOfBirth':DoB,
+                'monthOfBirth':MoB,
+                'yearOfBirth':YoB
+
             });
             console.log('Response:', response.data);
-            if(response.data.code === 0){
-                login(response.data)
-                navigation.replace("Chat")
+            if(response.data.code=== 0){
+                navigation.navigate("SignIn");
             }
 
-
         }catch(erroraxios){
-            setError(erroraxios);
-            setShowError(true)
-            console.error('Error:', error)
+            console.error('Error:', erroraxios)
         }
     }
     return(
         <View style={styles.container}>
             <Icon style={styles.icon}></Icon>
-            <Text style={styles.middle_titleSU}>Get into your employee account</Text>
+            <Text style={styles.middle_titleSU}>Make an account</Text>
             <View style={styles.inputContainer}>
+                <InputStuff name={"First name"} placeholder={"First name.."} type={'default'} value={firstName} onChangeText={setFirstName}></InputStuff>
+                <InputStuff name={"Last name"} placeholder={"Last name.."} type={'default'} value={lastName} onChangeText={setLastName}></InputStuff>
                 <InputStuff name={"Email"} placeholder={"Email.."} type={'email-address'} value={email} onChangeText={setEmail}></InputStuff>
-                <InputStuff name={"Code"} placeholder={"Code.."} type={'default'} value={code} onChangeText={setCode}></InputStuff>
-                { showError && (<Text style={styles.errortext}>{error}</Text>)}
-                <TouchableOpacity style={styles.button} onPress={handleSignIn}><Text style={styles.buttonText}>Start your journey</Text></TouchableOpacity>
+                <InputStuff name={"Password"} placeholder={"Password.."} type={'password'} value={password} onChangeText={setPassword}></InputStuff>
+                <InputStuff name={"DoB"} placeholder={"day of birth"} type={'default'} value={DoB} onChangeText={setDoB}></InputStuff>
+                <InputStuff name={"Last name"} placeholder={"month of birth"} type={'default'} value={MoB} onChangeText={setMoB}></InputStuff>
+                <InputStuff name={"Email"} placeholder={"year of birth"} type={'default'} value={YoB} onChangeText={setYoB}></InputStuff>
+                <InputStuff name={"Company name"} placeholder={"Company name.."} type={'default'} value={company} onChangeText={setCompany}></InputStuff>
+                <TouchableOpacity style={styles.button} onPress={handleSignUp}><Text style={styles.buttonText}>Start your journey</Text></TouchableOpacity>
+                <TouchableOpacity onPress={()=>{navigation.navigate('SignIn')}}><Text style={styles.buttonText}>or sign in</Text></TouchableOpacity>
             </View>
         </View>
     );
@@ -119,4 +132,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default EmployeeSignIn;
+export default EmployeeAdd;

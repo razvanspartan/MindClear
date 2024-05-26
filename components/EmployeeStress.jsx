@@ -1,16 +1,35 @@
 import { COLORS } from '../constants/colors';
 import {StyleSheet, Text, View} from "react-native";
 import StressLevelCard from "./stressLevelCard";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {useUserContext} from "../hooks/UserProvider";
 
 const EmployeeStress = ({firstName, lastName, stressLevels}) =>{
+    const {user} = useUserContext()
+    const [stress, setStress] = useState(-1)
+    useEffect(() => {
+        async function fetchData(){
+            if(user) {
+                try {
+                    const response = await axios.post('http://139.59.156.48:5000/api/getEmployeesStressLevel',  {'userid':user.userId})
 
+                    setStress(response.data.stress)
+                    console.log(response.data)
+                } catch (error) {
+                    console.log("Error:", error)
+                }
+            }
+        }
+        fetchData()
+    }, [user]);
     return(
         <View>
             <View style={styles.employeeStressCont}>
                 <StressLevelCard stressLevel={4}/>
                 <StressLevelCard stressLevel={9}/>
                 <StressLevelCard stressLevel={0}/>
-                <StressLevelCard stressLevel={1} isLast={1}/>
+                <StressLevelCard stressLevel={stress} isLast={1}/>
                 <Text style={styles.text}>Lucian</Text>
             </View>
             <View style={styles.employeeStressCont}>

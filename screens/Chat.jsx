@@ -80,6 +80,8 @@ const Chat = ({navigation}) => {
                         <Message key={index} value={msg.text} direction={msg.direction} />
                     ))}
             </ScrollView>
+            <Text style={styles.warning}>Remember, the chat data is not saved. You have full privacy</Text>
+            <Text style={styles.warning}>Send "done" when finished</Text>
             <View style={styles.textInputBox}>
                 <TextInput style={styles.textInput} placeholder={"Input text..."} value={message} onChangeText={setMessage}>
                 </TextInput>
@@ -111,6 +113,14 @@ const styles = StyleSheet.create({
         fontWeight:"800",
         marginTop: 30,
         marginLeft: 24,
+    },
+    warning:{
+        fontSize: 11,
+        marginBottom: '5%',
+        color: COLORS.primary,
+        fontFamily: "Roboto-Bold",
+        fontWeight:"800",
+        alignSelf: "center",
     },
     container: {
         flex: 1,

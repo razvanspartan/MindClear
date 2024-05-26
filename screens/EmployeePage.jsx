@@ -39,7 +39,7 @@ return(
         <TouchableOpacity style={styles.logoutButton} onPress={handlePress}><Text style={styles.logoutText}>Log out</Text></TouchableOpacity>
         <View style={styles.nameandButt}>
         <Text style={styles.middle_titleSU}>Hello, {user===undefined ? 'Guest' : user.firstName}</Text>
-        <TouchableOpacity style={styles.addButton}><Text style={styles.addButtonText}>Add an Employee</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.addButton}><Text style={styles.addButtonText} onPress={()=> navigation.navigate("EmployeeAdd")}>Add an Employee</Text></TouchableOpacity>
         </View>
         <View style={styles.empContainer}>
             <EmployeeStress></EmployeeStress>
