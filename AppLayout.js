@@ -17,10 +17,18 @@ const AppLayout = () => {
             'Lato-Bold': require('./assets/LatoFont/Lato-Bold.ttf')
         });
     };
+    console.log(user)
     return (
         <NavigationContainer>
-            {user==undefined?
-                <LoggedInStack />:<AuthentificationStack />}
+            {user ? (
+                user.userType === 'Employer' ? (
+                    <LoggedInStack initialRouteName="EmployeePage" />
+                ) : (
+                    <LoggedInStack initialRouteName="Chat" />
+                )
+            ) : (
+                <AuthentificationStack />
+            )}
         </NavigationContainer>
     );
 };

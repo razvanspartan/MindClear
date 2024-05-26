@@ -11,7 +11,7 @@ const LandingScreen = ({navigation}) => {
             <View style={styles.inputContainer}>
                 <Text style={styles.middle_title}>Get started</Text>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignUp')}><Text style={styles.buttonText}>I am an Employer</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>I am an Employee</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('EmployeeSignIn')}><Text style={styles.buttonText}>I am an Employee</Text></TouchableOpacity>
             </View>
             <Text style={styles.textBot}>Contact   |  ToS  |   Privacy</Text>
         </View>

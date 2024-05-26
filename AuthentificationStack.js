@@ -5,6 +5,7 @@ import {CardStyleInterpolators} from "@react-navigation/stack";
 import SignUp from "./screens/SignUpScreen";
 import SignIn from "./screens/SignIn";
 import EmployeePage from "./screens/EmployeePage";
+import EmployeeSignIn from "./screens/EmployeeSignIn";
 
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,7 @@ function AuthentificationStack() {
             <Stack.Screen options={{headerShown:false}} name="Landing" component={LandingScreen}/>
             <Stack.Screen options={{headerShown: false}} name="SignUp" component={SignUp} />
             <Stack.Screen options={{headerShown: false}} name="SignIn" component={SignIn} />
+            <Stack.Screen options={{headerShown: false}} name="EmployeeSignIn" component={EmployeeSignIn} />
 
 
         </Stack.Navigator>

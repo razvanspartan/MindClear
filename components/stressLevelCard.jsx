@@ -3,10 +3,10 @@ import {StyleSheet, View} from "react-native";
 
 const StressLevelCard=({stressLevel, isLast}) =>{
     const getColorForStressLevel = (stressLevel) => {
-        if (stressLevel < 20) return '#00FF00';
-        if (stressLevel < 40) return '#7FFF00';
-        if (stressLevel < 60) return '#FFFF00';
-        if (stressLevel < 80) return '#FF7F00';
+        if (stressLevel <= 2) return '#00FF00';
+        if (stressLevel <= 4) return '#7FFF00';
+        if (stressLevel <= 6) return '#FFFF00';
+        if (stressLevel <= 8) return '#FF7F00';
         return '#8B0000';
     };
 

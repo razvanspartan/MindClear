@@ -8,26 +8,21 @@ import inputStuff from "../components/input";
 import InputStuff from "../components/input";
 import axios from 'axios';
 import {useUserContext} from "../hooks/UserProvider";
-const SignIn = ({navigation}) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const EmployeeSignIn = ({navigation}) => {
+    const [code, setCode] = useState('');
     const [error, setError] =useState('')
     const [showError, setShowError] = useState(false)
     const { login } = useUserContext();
     const handleSignIn = async () =>{
         try{
 
-            const response = await axios.post('http://139.59.156.48:5000/api/login', {
-                'email':email,
-                'password':password,
+            const response = await axios.post('http://139.59.156.48:5000/api/EmployeeCode', {
+                'Employeecode': code,
             });
             console.log('Response:', response.data);
             if(response.data.code === 0){
-                login({
-                    ...response.data,
-                    userType: "Employer", // Assuming the response includes userType
-                });
-                navigation.replace("EmployeePage")
+                login(response.data)
+                navigation.replace("Chat")
             }
 
 
@@ -40,10 +35,9 @@ const SignIn = ({navigation}) => {
     return(
         <View style={styles.container}>
             <Icon style={styles.icon}></Icon>
-            <Text style={styles.middle_titleSU}>Get into your account</Text>
+            <Text style={styles.middle_titleSU}>Get into your employee account</Text>
             <View style={styles.inputContainer}>
-                <InputStuff name={"Email"} placeholder={"Email.."} type={'email-address'} value={email} onChangeText={setEmail}></InputStuff>
-                <InputStuff name={"Password"} placeholder={"Password.."} type={'password'} value={password} onChangeText={setPassword}></InputStuff>
+                <InputStuff name={"Code"} placeholder={"Code.."} type={'default'} value={code} onChangeText={setCode}></InputStuff>
                 { showError && (<Text style={styles.errortext}>{error}</Text>)}
                 <TouchableOpacity style={styles.button} onPress={handleSignIn}><Text style={styles.buttonText}>Start your journey</Text></TouchableOpacity>
             </View>
@@ -122,4 +116,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SignIn;
+export default EmployeeSignIn;
